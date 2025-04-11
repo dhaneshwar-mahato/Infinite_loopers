@@ -24,7 +24,7 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
   <div class="swiper bannerSwiper h-[60vh] md:h-[75vh]">
     <div class="swiper-wrapper">
       <div class="swiper-slide relative">
-        <img src="assets/images/1.jpg" class="w-full h-full object-cover" alt="Banner 1">
+        <img src="assets/images/sliders/slider1.jpeg" class="w-full h-full object-cover" alt="Banner 1">
         <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white text-center">
           <h2 class="text-3xl md:text-5xl font-bold mb-4">Empowering Citizens</h2>
           <p class="text-lg md:text-xl mb-6">Explore benefits made for you.</p>
@@ -32,7 +32,23 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
         </div>
       </div>
       <div class="swiper-slide relative">
-        <img src="assets/images/2.jpg" class="w-full h-full object-cover" alt="Banner 2">
+        <img src="assets/images/sliders/slider2.jpeg" class="w-full h-full object-cover" alt="Banner 2">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white text-center">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">Know Your Rights</h2>
+          <p class="text-lg md:text-xl mb-6">Find and apply for government schemes easily.</p>
+          <a href="<?= $redirectLink ?>" onclick="event.stopPropagation()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition">Get Started</a>
+        </div>
+      </div>
+      <div class="swiper-slide relative">
+        <img src="assets/images/sliders/slider3.jpeg" class="w-full h-full object-cover" alt="Banner 3">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white text-center">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">Know Your Rights</h2>
+          <p class="text-lg md:text-xl mb-6">Find and apply for government schemes easily.</p>
+          <a href="<?= $redirectLink ?>" onclick="event.stopPropagation()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition">Get Started</a>
+        </div>
+      </div>
+      <div class="swiper-slide relative">
+        <img src="assets/images/sliders/slider4.jpeg" class="w-full h-full object-cover" alt="Banner 4">
         <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white text-center">
           <h2 class="text-3xl md:text-5xl font-bold mb-4">Know Your Rights</h2>
           <p class="text-lg md:text-xl mb-6">Find and apply for government schemes easily.</p>
@@ -41,12 +57,14 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
       </div>
     </div>
 
-    <!-- Navigation buttons -->
+    <!-- Navigation buttons (optional, you can keep these) -->
     <div class="swiper-button-next text-white"></div>
     <div class="swiper-button-prev text-white"></div>
-    <div class="swiper-pagination"></div>
+    
+    <!-- Removed: <div class="swiper-pagination"></div> -->
   </div>
 </section>
+
 
 
 
