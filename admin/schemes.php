@@ -15,17 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $min_age = (int)$_POST['min_age'];
     $max_age = (int)$_POST['max_age'];
     $income_range = trim($_POST['income_range']);
-    $occupation = trim($_POST['occupation']);
+    $beneficiary = trim($_POST['beneficiary']);
     $location = trim($_POST['location']);
+    $benefits = trim($_POST['benefits']); // Added benefits field
 
     if (isset($_POST['scheme_id']) && $_POST['scheme_id'] !== '') {
         $id = (int)$_POST['scheme_id'];
-        $stmt = $conn->prepare("UPDATE schemes SET title=?, description=?, min_age=?, max_age=?, income_limit=?, occupation=?, location=? WHERE id=?");
-        $stmt->execute([$title, $description, $min_age, $max_age, $income_range, $occupation, $location, $id]);
+        $stmt = $conn->prepare("UPDATE schemes SET title=?, description=?, min_age=?, max_age=?, income_limit=?, beneficiary=?, location=?, benefits=? WHERE id=?");
+        $stmt->execute([$title, $description, $min_age, $max_age, $income_range, $beneficiary, $location, $benefits, $id]);
         $_SESSION['success'] = "Scheme updated successfully!";
     } else {
-        $stmt = $conn->prepare("INSERT INTO schemes (title, description, min_age, max_age, income_limit, occupation, location) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$title, $description, $min_age, $max_age, $income_range, $occupation, $location]);
+        $stmt = $conn->prepare("INSERT INTO schemes (title, description, min_age, max_age, income_limit, beneficiary, location, benefits) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$title, $description, $min_age, $max_age, $income_range, $beneficiary, $location, $benefits]);
         $_SESSION['success'] = "New scheme added successfully!";
     }
 
@@ -85,6 +86,11 @@ $schemes = $conn->query("SELECT * FROM schemes ORDER BY id DESC")->fetchAll(PDO:
         <textarea name="description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"><?= $edit_scheme ? htmlspecialchars($edit_scheme['description']) : '' ?></textarea>
       </div>
 
+      <div class="md:col-span-3">
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Benefits</label>
+        <textarea name="benefits" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"><?= $edit_scheme ? htmlspecialchars($edit_scheme['benefits']) : '' ?></textarea>
+      </div>
+
       <div>
         <label class="block text-sm font-semibold text-gray-700 mb-1">Min Age</label>
         <input type="number" name="min_age" class="w-full px-4 py-2 border border-gray-300 rounded"
@@ -104,9 +110,9 @@ $schemes = $conn->query("SELECT * FROM schemes ORDER BY id DESC")->fetchAll(PDO:
       </div>
 
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-1">Occupation</label>
-        <input type="text" name="occupation" class="w-full px-4 py-2 border border-gray-300 rounded"
-               value="<?= $edit_scheme ? htmlspecialchars($edit_scheme['occupation']) : '' ?>">
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Beneficiary</label>
+        <input type="text" name="beneficiary" class="w-full px-4 py-2 border border-gray-300 rounded"
+               value="<?= $edit_scheme ? htmlspecialchars($edit_scheme['beneficiary']) : '' ?>">
       </div>
 
       <div>
@@ -132,7 +138,7 @@ $schemes = $conn->query("SELECT * FROM schemes ORDER BY id DESC")->fetchAll(PDO:
               <th class="px-4 py-2">Title</th>
               <th class="px-4 py-2">Age</th>
               <th class="px-4 py-2">Income</th>
-              <th class="px-4 py-2">Occupation</th>
+              <th class="px-4 py-2">Eligibility</th> <!-- Added Eligibility column -->
               <th class="px-4 py-2">Location</th>
               <th class="px-4 py-2">Actions</th>
             </tr>
@@ -143,7 +149,7 @@ $schemes = $conn->query("SELECT * FROM schemes ORDER BY id DESC")->fetchAll(PDO:
                 <td class="px-4 py-2 font-medium text-gray-800"><?= htmlspecialchars($scheme['title']) ?></td>
                 <td class="px-4 py-2 text-gray-600"><?= $scheme['min_age'] ?> - <?= $scheme['max_age'] ?></td>
                 <td class="px-4 py-2 text-gray-600"><?= htmlspecialchars($scheme['income_limit']) ?></td>
-                <td class="px-4 py-2 text-gray-600"><?= htmlspecialchars($scheme['occupation']) ?></td>
+                <td class="px-4 py-2 text-gray-600"><?= htmlspecialchars($scheme['beneficiary']) ?></td> <!-- Display eligibility -->
                 <td class="px-4 py-2 text-gray-600"><?= htmlspecialchars($scheme['location']) ?></td>
                 <td class="px-4 py-2 space-x-2">
                   <a href="schemes.php?edit=<?= $scheme['id'] ?>" class="text-indigo-600 hover:underline">Edit</a>

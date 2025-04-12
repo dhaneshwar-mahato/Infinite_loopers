@@ -90,29 +90,30 @@ $schemes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="max-w-6xl mx-auto px-4 py-10 fade-slide-up">
   <h1 class="text-3xl md:text-4xl font-bold text-blue-700 mb-6 text-center">Find Government Schemes</h1>
   
+  <!-- Filter Form -->
   <form method="GET" class="grid md:grid-cols-4 gap-4 bg-white p-6 rounded-lg shadow mb-8">
-  <div>
-    <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
-    <input type="number" name="age" value="<?= htmlspecialchars($filters['age']) ?>" placeholder="Enter Age" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
-  </div>
-  <div>
-    <label class="block text-sm font-medium text-gray-700 mb-1">Monthly Income</label>
-    <input type="number" name="income" step="0.01" value="<?= htmlspecialchars($filters['income']) ?>" placeholder="Enter Income" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
-  </div>
-  <div>
-    <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
-    <input type="text" name="location" value="<?= htmlspecialchars($filters['location']) ?>" placeholder="Enter Location" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
-  </div>
-  <div>
-    <label class="block text-sm font-medium text-gray-700 mb-1">Occupation</label>
-    <input type="text" name="occupation" value="<?= htmlspecialchars($filters['occupation']) ?>" placeholder="Enter Occupation" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
-  </div>
-  <div class="md:col-span-4 text-right">
-    <button type="submit" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Apply Filters</button>
-  </div>
-</form>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+      <input type="number" name="age" value="<?= htmlspecialchars($filters['age']) ?>" placeholder="Enter Age" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Monthly Income</label>
+      <input type="number" name="income" step="0.01" value="<?= htmlspecialchars($filters['income']) ?>" placeholder="Enter Income" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+      <input type="text" name="location" value="<?= htmlspecialchars($filters['location']) ?>" placeholder="Enter Location" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Occupation</label>
+      <input type="text" name="occupation" value="<?= htmlspecialchars($filters['occupation']) ?>" placeholder="Enter Occupation" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="md:col-span-4 text-right">
+      <button type="submit" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Apply Filters</button>
+    </div>
+  </form>
 
-
+  <!-- Schemes Display -->
   <div class="grid md:grid-cols-2 gap-6">
     <?php if (count($schemes) > 0): ?>
       <?php foreach ($schemes as $scheme): ?>
@@ -123,7 +124,7 @@ $schemes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><strong>Age Range:</strong> <?= $scheme['min_age'] ?> - <?= $scheme['max_age'] ?></li>
             <li><strong>Income Limit:</strong> ₹<?= number_format($scheme['income_limit']) ?></li>
             <li><strong>Location:</strong> <?= $scheme['location'] ?: 'Any' ?></li>
-            <li><strong>Occupation:</strong> <?= $scheme['occupation'] ?: 'Any' ?></li>
+            <!-- <li><strong>Occupation:</strong> <?= $scheme['occupation'] ?: 'Any' ?></li> -->
           </ul>
         </div>
       <?php endforeach; ?>

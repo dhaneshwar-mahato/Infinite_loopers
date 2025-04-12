@@ -1,9 +1,19 @@
 <?php
+session_start();
+require_once 'lang.php'; // Include the language array
+
+// Language switch handling
+if (isset($_POST['lang_switch'])) {
+    $_SESSION['lang'] = ($_SESSION['lang'] ?? 'en') === 'en' ? 'hi' : 'en'; // Toggle between 'en' and 'hi'
+}
+
+$lang = $_SESSION['lang'] ?? 'en'; // Default to English if no language is set
 $isLoggedIn = isset($_SESSION['user_id']);
+$redirectLink = $isLoggedIn ? 'index.php' : 'login.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $lang ?>">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -69,7 +79,7 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
 <!-- 🎞️ Featured Schemes Carousel -->
 <section class="w-full px-4 md:px-8 py-10 bg-white mt-10">
   <div class="w-full rounded-md shadow-md p-6 bg-white">
-    <h2 class="text-2xl font-semibold mb-4">Featured Schemes</h2>
+  <h2 class="text-2xl font-semibold mb-4"><?= $langData['featured_schemes'] ?></h2>
     
     <div class="swiper mySwiper rounded overflow-hidden">
       <div class="swiper-wrapper">
@@ -96,7 +106,7 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
 
 <!-- 📄 More Schemes -->
 <section class="w-full p-6 mt-10">
-  <h2 class="text-2xl font-semibold mb-4">Explore More Schemes</h2>
+<h2 class="text-2xl font-semibold mb-4"><?= $langData['explore_more_schemes'] ?></h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <?php
     $otherSchemes = [
@@ -126,7 +136,7 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
 
     <!-- Right: Text -->
     <div class="w-full md:w-1/2">
-      <h3 class="text-3xl font-bold text-blue-700 mb-4">Our Team</h3>
+    <h3 class="text-3xl font-bold text-blue-700 mb-4"><?= $langData['our_team'] ?></h3>
       <p class="text-gray-700 leading-relaxed mb-4">
         <span class="ml-4">Our "one team" attitude breaks down silos and helps us engage equally effectively from the C-suite to the front line...</span>
       </p>
@@ -145,7 +155,7 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
   
   <!-- Programmes Column -->
   <div>
-    <h3 class="text-2xl font-semibold text-blue-700 mb-4">Programmes</h3>
+  <h3 class="text-2xl font-semibold text-blue-700 mb-4"><?= $langData['programmes'] ?></h3>
     <p class="text-gray-700 text-sm leading-relaxed">
       Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
       <br><br>
@@ -155,7 +165,7 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
 
   <!-- Latest News (Accordion) Column -->
   <div>
-    <h3 class="text-2xl font-semibold text-blue-700 mb-4">Latest News</h3>
+  <h3 class="text-2xl font-semibold text-blue-700 mb-4"><?= $langData['testimonials'] ?></h3>
     <div class="space-y-4">
       <details class="group border border-gray-200 rounded-lg p-4">
         <summary class="font-medium cursor-pointer text-blue-600 group-open:text-blue-800">Accordion Heading Text Item #1</summary>
@@ -186,9 +196,9 @@ $redirectLink = isset($_SESSION['user_id']) ? 'index.php' : 'login.php';?>
 
   <!-- Testimonials Column -->
   <div>
-    <h3 class="text-2xl font-semibold text-blue-700 mb-4">Testimonials</h3>
+  <h3 class="text-2xl font-semibold text-blue-700 mb-4"><?= $langData['testimonials'] ?></h3>
     <div class="bg-gray-100 p-6 rounded-lg shadow text-sm">
-      <p class="italic text-gray-700">“Lorem ipsum dolor met consectetur adipisicing. Aorem psum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.”</p>
+    <p class="italic text-gray-700"><?= $langData['testimonial_quote'] ?></p>
       <div class="flex items-center mt-4">
         <img src="plugins/home-plugins/img/team4.jpg" alt="Dhaneshwar Mahato" class="w-12 h-12 rounded-full border-2 border-blue-500">
         <div class="ml-4">
